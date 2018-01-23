@@ -1,4 +1,4 @@
-##To-do .NET Core
+## To-do .NET Core
 
 Simple to-do web application implemented in .NET Core 2.0, typically used for demonstration purposes in talks and presentations.
 
