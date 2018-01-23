@@ -1,0 +1,75 @@
+﻿@model IndexViewModel
+
+@{
+    ViewData["Title"] = "To-Do App";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-controller="Home" asp-action="Index" method="post">
+            <div class="form-group">
+                <input asp-for="NewTask.Description" class="form-control form-control-lg" placeholder="New Task..." />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary btn-full"/>
+            </div>
+        </form>
+
+        <hr />
+
+        <h2>Current Tasks</h2>
+        @if (Model.AllTasks.Where(t => t.IsCompleted == false).ToList().Count > 0)
+        {
+            <div class="list-group">
+                @foreach (var task in Model.AllTasks.Where(t => t.IsCompleted == false).ToList())
+                {
+                    <div class="list-group-item list-group-item-action">
+                        @Html.DisplayFor(m => task.Description)
+                        <div class="float-right">
+                            <form asp-controller="Home" asp-action="Delete" method="post">
+                                <input type="hidden" value="@task.TaskId" name="id"/>
+                                <button type="submit" class="btn btn-sm btn-light">
+                                    X
+                                </button>
+                            </form>
+                        </div>
+                        <div class="float-right">
+                            <form asp-controller="Home" asp-action="MarkCompleted" method="post">
+                                <input type="hidden" value="@task.TaskId" name="id"/>
+                                <button type="submit" class="btn btn-sm btn-light">
+                                    ✓
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        } else
+        {
+            <strong>You have no tasks!</strong>
+        }
+
+        @if (Model.AllTasks.Where(t => t.IsCompleted == true).ToList().Count > 0)
+        {
+            <hr />
+
+            <h3>Completed Tasks</h3>
+            <div class="list-group">
+                @foreach (var task in Model.AllTasks.Where(t => t.IsCompleted).ToList())
+                {
+                    <div class="list-group-item list-group-item-action">
+                        @Html.DisplayFor(m => task.Description)
+                        <span class="float-right">
+                            <form asp-controller="Home" asp-action="Delete" method="post">
+                                <input type="hidden" value="@task.TaskId" name="id"/>
+                                <button type="submit" class="btn btn-sm btn-light">
+                                    X
+                                </button>
+                            </form>
+                        </span>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

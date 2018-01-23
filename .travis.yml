@@ -1,0 +1,19 @@
+language: csharp
+solution: ./src/ToDo.Web.sln
+mono: none
+dotnet: 2.0.0
+dist: trusty
+script:
+- dotnet restore $TRAVIS_SOLUTION
+- dotnet build $TRAVIS_SOLUTION
+- dotnet test ./src/ToDo.Web.Test/
+branches:
+  only:
+  - master
+deploy:
+  provider: azure_web_apps
+  username: "$AZURE_WA_USERNAME"
+  password: "$AZURE_WA_PASSWORD"
+  site: "$AZURE_WA_SITE"
+  skip_cleanup: true
+  verbose: true
