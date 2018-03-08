@@ -1,0 +1,20 @@
+groups:
+- name: todo-dotnetcore-build
+  jobs:
+  - build
+
+resources:
+- name: todo-dotnetcore
+  type: git
+  source:
+    uri: https://github.com/jaymickey/todo-dotnetcore.git
+    branch: master
+
+jobs:
+- name: build
+  public: true
+  plan:
+  - get: todo-dotnetcore
+    trigger: true
+  - task: build
+    file: todo-dotnetcore/ci/tasks/build/build.yml
