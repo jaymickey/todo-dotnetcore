@@ -4,4 +4,4 @@ cd todo-dotnetcore/src
 
 dotnet restore
 dotnet build
-dotnet test
+dotnet test ./ToDo.Web.Test/
