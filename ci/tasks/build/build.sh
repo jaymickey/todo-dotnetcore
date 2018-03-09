@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd todo-dotnetcore/src
+cd git/src
 
 dotnet restore
 dotnet build
