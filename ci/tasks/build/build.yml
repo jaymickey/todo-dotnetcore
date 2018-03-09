@@ -6,8 +6,8 @@ image_resource:
     repository: microsoft/dotnet
 
 inputs:
-- name: todo-dotnetcore
+- name: git
 
 run:
   path: sh
-  args: ["todo-dotnetcore/ci/tasks/build/build.sh"]
+  args: ["git/ci/tasks/build/build.sh"]
